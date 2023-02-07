@@ -23,7 +23,7 @@ data "aws_iam_policy_document" "lambda_execution_policy" {
 resource "aws_lambda_function" "lambda" {
   function_name = local.function_name
   filename      = "ami_cleanup.zip"
-  handler       = "index.lambda_handler"
+  handler       = "ami_cleanup.lambda_handler"
   runtime       = "python3.9"
   role          = aws_iam_role.lambda.arn
 }
