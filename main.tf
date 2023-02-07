@@ -10,6 +10,7 @@ data "aws_iam_policy_document" "lambda_execution_policy" {
   statement {
     actions = [
       "ec2:DescribeImages",
+      "ec2:DescribeSnapshots",
       "ec2:DeregisterImage",
       "ec2:DeleteSnapshot",
       "autoscaling:DescribeLaunchConfigurations",
@@ -26,6 +27,7 @@ resource "aws_lambda_function" "lambda" {
   handler       = "ami_cleanup.lambda_handler"
   runtime       = "python3.9"
   role          = aws_iam_role.lambda.arn
+  timeout       = 90
 }
 
 resource "aws_iam_role" "lambda" {
@@ -56,7 +58,7 @@ resource "aws_iam_role_policy" "lambda_execution_policy" {
 resource "aws_cloudwatch_event_rule" "clean_ami_snapshot_cron_rule" {
   name                = "clean-ami-snapshot-cron-rule"
   description         = "Eventbridge rule to trigger lambda function for cleaning AMIs and snapshots"
-  schedule_expression = "rate(3 days)"
+  schedule_expression = "rate(7 days)"
 }
 
 resource "aws_cloudwatch_event_target" "lambda_target" {
