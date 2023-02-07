@@ -56,7 +56,7 @@ resource "aws_iam_role_policy" "lambda_execution_policy" {
 resource "aws_cloudwatch_event_rule" "clean_ami_snapshot_cron_rule" {
   name                = "clean-ami-snapshot-cron-rule"
   description         = "Eventbridge rule to trigger lambda function for cleaning AMIs and snapshots"
-  schedule_expression = "rate(7 days)"
+  schedule_expression = "rate(3 days)"
 }
 
 resource "aws_cloudwatch_event_target" "lambda_target" {
