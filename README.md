@@ -1,5 +1,5 @@
 # cleanAMIandSnapshots
-AWS Lambda funcion to cleanup of AMI/Snapshots associates and abandoned snapshots
+AWS Lambda function to cleanup of AMI/Snapshots associates and abandoned snapshots
 
 
 Artigo no medium explicando como implantar e usar o script!
